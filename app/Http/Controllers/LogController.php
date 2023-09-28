@@ -7,6 +7,7 @@ use App\Http\Requests\ValidateEntranceRequest;
 use Illuminate\Http\Request;
 use App\Models\User;
 
+
 class LogController extends Controller
 {
     public function index(){

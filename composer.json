@@ -38,7 +38,8 @@
         "files": [
             "app/helpers.php",
             "app/reg_auth_helper.php",
-            "app/auth_helpers.php"
+            "app/auth_helpers.php",
+            "app/admin_helpers.php"
         ]
     },
 

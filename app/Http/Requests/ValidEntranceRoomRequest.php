@@ -3,7 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Password;
+use Illuminate\Validation\Rules\Password;
+
 
 class ValidEntranceRoomRequest extends FormRequest
 {
@@ -23,11 +24,12 @@ class ValidEntranceRoomRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required','string','max:50'],
-            'password' =>['required', Password::min(8)
+            'name' => ['required','string','min:2'],
+            'password' => ['required', Password::min(8)
                 ->mixedCase()
                 ->numbers()
-                ->symbols()]
+                ->symbols()],
+            'remember' => ['nullable','string'],
         ];
     }
 }
