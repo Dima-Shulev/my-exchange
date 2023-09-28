@@ -31,7 +31,7 @@ class AppServiceProvider extends ServiceProvider
         });
 
         View::share('dates', date("Y"));
-        View::share('links', Page::select(['id','name','url'])->get());
+        View::share('links', Page::select(['id','name','url'])->where('active',1)->get());
 
 
 
