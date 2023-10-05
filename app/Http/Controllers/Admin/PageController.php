@@ -32,7 +32,8 @@ class PageController extends Controller
 
     public function update($id, ValidatePageRequest $request){
         $result = $request->validated();
-        return update_page($result,$id,checkPublic($request,$result));
+        $result['checkPublic'] = checkPublic($request,$result);
+        return update_page($result,$id);
     }
 
     public function publicPage($id,$active){
