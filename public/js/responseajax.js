@@ -80,11 +80,11 @@ class ResponseAjax extends CurrencyDate
             const awaites = setInterval(() => {
                 if (this.defaultCur !== undefined) {
                     if (chart !== "candle" && this.getCurrency.value === "def") {
-                        this.draw = new Draw("1INCHBTC", this.getTypeDraw(chart));
+                        this.draw = new Draw("ETHUSDT", this.getTypeDraw(chart));
                         this.draw.drawChartDb(this.defaultCur);
                         clearInterval(awaites);
                     } else if (chart === "candle" && this.getCurrency.value === "def") {
-                            this.draw = new Draw("1INCHBTC", "CandlestickChart");
+                            this.draw = new Draw("ETHUSDT", "CandlestickChart");
                             this.draw.drawChartDbCandle(this.defaultCur);
                             clearInterval(awaites);
                         }

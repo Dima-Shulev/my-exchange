@@ -133,7 +133,8 @@ if(! function_exists('create_page')) {
 
 
 if(! function_exists('update_page')) {
-    function update_page($result,$id){
+    function update_page($result,$id,$public){
+
         if($result){
             $update = Page::find((int)$id);
             $update->name = $result['name'];
@@ -143,7 +144,7 @@ if(! function_exists('update_page')) {
             $update->created_at = new Carbon($result['created_at']);
             $update->user_id = 1;
             $update->module_name = $result['module'];
-            $update->active = $result['checkPublic'];
+            $update->active = $public;
             $update->url = url_translit($result['name']);
             $update->save();
 

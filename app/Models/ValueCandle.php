@@ -85,8 +85,6 @@ class ValueCandle extends Model
                 break;
 
             case "five":
-                /*$obj = new ValueCandle;
-                $obj->selectToDb((string)$idCurrency->id, "five");*/
 
                 $valuesFiveMinute = ValueCandle::select("open", "min", "max", "close", "status", "created_at", "currency_id")
                     ->where([["currency_id", (int)$idCurrency->id], ["status", "five"]])
@@ -137,7 +135,7 @@ class ValueCandle extends Model
 
             default:
                 $valuesDefMinute = ValueCandle::select("open", "min", "max", "close", "status", "created_at", "currency_id")
-                    ->where([["currency_id", (int)"299"],["status", "one"]])
+                    ->where([["currency_id", (int)"1342"],["status", "one"]])
                     ->orderBy("created_at", "DESC")
                     ->take(10)
                     ->get()
