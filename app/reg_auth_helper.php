@@ -3,14 +3,17 @@
 use App\Mail\MailerClient;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
-use Illuminate\Http\File;use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\File;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 
 if(! function_exists('register')){
     function register($request){
-       if(!empty($request->avatar)){
+
+        if(!empty($request->avatar)){
+
             $path = Storage::disk('avatar')->putFile('',new File($request->avatar));
             $linkImage = asset("storage/avatar/{$path}");
         }else{
@@ -32,12 +35,12 @@ if(! function_exists('register')){
             $user = User::select(['id','name','email','active','status','avatar','balance','created_at'])
                 ->where('email',$request->email)
                 ->first();
-            session_user($user,'session_user',$linkImage);
             Auth::login($createUser);
+            session_user($user,'session_user',$linkImage);
+            return redirect()->route('home')->with('success', 'register');
+        }
             event(new Registered($createUser));
             return redirect()->route('verification.notice');
-         }
-         return redirect()->route('home')->with('success', 'register');
     }
 
     if(! function_exists('user_entrance')){

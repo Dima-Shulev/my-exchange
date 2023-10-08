@@ -78,7 +78,7 @@ if(! function_exists('session_user')){
         $session->put('email',$user->email);
         $session->put('balance',$user->balance);
         $session->put('avatar',$link);
-        Auth::login($user);
+        /*Auth::login($user);*/
     }
 }
 

@@ -29,11 +29,7 @@ class AppServiceProvider extends ServiceProvider
                 ->line('Нажмите для подтверждения')
                 ->action('Подтвердить', $url);
         });
-
         View::share('dates', date("Y"));
         View::share('links', Page::select(['id','name','url'])->where('active',1)->get());
-
-
-
     }
 }

@@ -4,8 +4,8 @@
     <x-title>
         {{__('Подтвердите Email')}}
     </x-title>
-    <p>Необходимо подтвердить ваш  Email</p>
-    <a href="{{ route('verification.send') }}">
-        Отправить повторно !
-    </a>
+    <form action="{{ route('verification.send') }}">
+        <p>Для подтверждения вашего Email, Вам было отправлено письмо на указанный Вами при регистрации почтовый ящик.<br />Если письмо не пришло</p>
+        <button type="submit">Отправить повторно !</button>
+    </form>
 @endsection

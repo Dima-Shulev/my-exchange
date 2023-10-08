@@ -44,7 +44,7 @@
                          <x-label>
                              {{ __('Ваш аватар:') }}
                          </x-label>
-                         <x-input type="file" name="avatar" access="avatar" />
+                         <x-input type="file" name="avatar" accept="image/png, image/jpeg, image/giv, image/png, image/webp" />
                      </x-form-item>
 
 

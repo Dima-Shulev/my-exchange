@@ -1,10 +1,9 @@
 <?php
 
+use Illuminate\Http\Request;
 use App\Http\Controllers\Auth\ArticleController;
 use App\Http\Controllers\Auth\CategoryController;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Auth\PostController;
 use App\Http\Controllers\Auth\RoomController;
 use App\Http\Controllers\Auth\ReviewsController;
 
@@ -23,7 +22,6 @@ Route::prefix('auth')->middleware('auth')->middleware('active')->middleware('ver
 
     Route::get('/article', [ArticleController::class, 'index'])->name('auth.article');
     Route::get('/article/{url}', [ArticleController::class, 'show'])->name('auth.articles.show');
-
 
     Route::get('/reviews',[ReviewsController::class,'index'])->name('auth.reviews');
     Route::get('/reviews/create',[ReviewsController::class,'create'])->name('auth.reviews.create');
