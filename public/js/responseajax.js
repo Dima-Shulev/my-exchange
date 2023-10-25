@@ -22,7 +22,7 @@ class ResponseAjax extends CurrencyDate
         this.getCurrencyAndDefault();
     }
 
-    //запрос и получение данных с db
+    //запрос и получение данных валютных пар с db
     async ajax(url, ContentType) {
         const myFetch = await fetch(url, {
             method: "GET",
@@ -54,7 +54,7 @@ class ResponseAjax extends CurrencyDate
         this.ajax( "/ajax", "application/json");
     }
 
-    //отправка выбора пользователя
+    //отправка выбора диаграммы пользователя
     getTypeDraw(typesChart){
         if(typesChart === "chart"){typesChart = "AreaChart";}
         else if(typesChart === "line"){typesChart = "LineChart";}
@@ -83,13 +83,13 @@ class ResponseAjax extends CurrencyDate
                         this.draw = new Draw("ETHUSDT", this.getTypeDraw(chart));
                         this.draw.drawChartDb(this.defaultCur);
                         clearInterval(awaites);
-                    } else if (chart === "candle" && this.getCurrency.value === "def") {
-                            this.draw = new Draw("ETHUSDT", "CandlestickChart");
-                            this.draw.drawChartDbCandle(this.defaultCur);
-                            clearInterval(awaites);
+                        } else if (chart === "candle" && this.getCurrency.value === "def") {
+                                this.draw = new Draw("ETHUSDT", "CandlestickChart");
+                                this.draw.drawChartDbCandle(this.defaultCur);
+                                clearInterval(awaites);
                         }
                     }
-            }, 3000);
+            }, 1000);
         }
     }
 
@@ -124,7 +124,7 @@ class ResponseAjax extends CurrencyDate
                                     clearInterval(checkChange);
                                 }
                             }
-                        }, 7000);
+                        }, 1000);
 
                         const checkCurrency = setInterval((currency)=>{
                             if(currency !== this.getCurrency.value){
@@ -132,7 +132,7 @@ class ResponseAjax extends CurrencyDate
                                 this.draw.drawChartDb(this.currencyAndValue);
                                 clearInterval(checkCurrency);
                             }
-                        },5000);
+                        },500);
                     }, 10);
             }
 
@@ -149,7 +149,7 @@ class ResponseAjax extends CurrencyDate
                                 clearInterval(changeCandle);
                             }
                         }
-                    },7000);
+                    },2500);
                 }, 100);
             }
     }
@@ -185,32 +185,8 @@ class ResponseAjax extends CurrencyDate
             if(this.getCurrency.value !== "def") {
                 this.whatPush.style.display = "block";
             }
-            if(this.whatPush.name === undefined) {
-                if (this.chart === "candle"){
-                    this.ajaxValue({
-                        name: this.getCurrency.value,
-                        item: this.whatPush.name
-                    }, "/ajaxValueCandle", "application/json", this.token.content, this.whatPush.name);
-                    this.draw = new Draw(this.getCurrency.value, this.getTypeDraw(this.chart));
-                    this.intervalType(this.currencyAndValue, this.chart, this.whatPush.name);
-                }else{
-                    this.draw = new Draw(this.getCurrency.value, this.getTypeDraw(this.chart));
-                    this.intervalType(this.currencyAndValue, this.chart, this.whatPush.name);
-                }
-            }else{
-                if (this.chart !== "candle") {
-                    this.draw = new Draw(this.getCurrency.value, this.getTypeDraw(this.chart));
-                    this.intervalType(this.currencyAndValue, this.chart, this.whatPush.name);
-                }else{
-                    this.ajaxValue({
-                        name: this.getCurrency.value,
-                        item: this.whatPush.name
-                    }, "/ajaxValueCandle", "application/json", this.token.content, this.whatPush.name);
-                    this.draw = new Draw(this.getCurrency.value, this.getTypeDraw(this.chart));
-                    this.intervalType(this.currencyAndValue, this.chart, this.whatPush.name);
-                }
-            }
-
+              this.draw = new Draw(this.getCurrency.value, this.getTypeDraw(this.chart));
+              this.intervalType(this.currencyAndValue, this.chart, this.whatPush.name);
         });
     };
 
@@ -224,10 +200,10 @@ class ResponseAjax extends CurrencyDate
                     setTimeout(() => {
                         this.draw.drawChartDbCandle(object, howTime);
                         clearInterval(ob);
-                    }, 5000);
+                    }, 2000);
                 }
             }
-        },5000);
+        },2100);
     }
 
     updateMinute(timeString,timeOut){
@@ -268,7 +244,7 @@ class ResponseAjax extends CurrencyDate
                                 clearInterval(checks);
                             }
                         }
-                    }, 11000);
+                    }, 5000);
             }
         });
     }

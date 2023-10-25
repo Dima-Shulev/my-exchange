@@ -17,7 +17,8 @@
         "symfony/mailgun-mailer": "^6.3",
         "symfony/postmark-mailer": "^6.3",
         "tinymce/tinymce": "^6.7",
-        "walkor/workerman": "^4.1"
+        "walkor/workerman": "^4.1",
+        "predis/predis": "1.*"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

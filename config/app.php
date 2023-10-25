@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Facade;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Redis;
 
 return [
 
@@ -140,8 +141,8 @@ return [
     */
 
     'maintenance' => [
-        'driver' => 'file',
-        // 'store'  => 'redis',
+        //'driver' => 'file',
+        'store'  => 'redis',
     ],
 
     /*
@@ -182,7 +183,8 @@ return [
     */
 
     'aliases' => Facade::defaultAliases()->merge([
-        // 'Example' => App\Facades\Example::class,
+        //'Example' => App\Facades\Example::class,
+        'Redis' => Illuminate\Support\Facades\Redis::class,
     ])->toArray(),
 
 ];

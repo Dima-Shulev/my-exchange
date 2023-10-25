@@ -21,6 +21,7 @@ class PageController extends Controller
 
     public function store(ValidatePageRequest $request){
         $result = $request->validated();
+        $result['checkPublic'] = checkPublic($request,$result);
         return create_page($result);
     }
 

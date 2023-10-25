@@ -19,7 +19,7 @@ class ClientCurrency extends Command
      *
      * @var string
      */
-    protected $signature = 'command:startWs {start}';/* {mode}*/
+    protected $signature = 'command:startWs {start} {mode}';
 
     /**
      * The console command description.
@@ -33,12 +33,15 @@ class ClientCurrency extends Command
      */
     public function handle()
     {
-        /*global $argv;
+        global $argv;
         $argv[1] = $this->argument('start');
-        $argv[2] = ($this->argument('mode') === 'd' ? '-d':'-g');*/
+        $argv[2] = ($this->argument('mode') === 'd' ? '-d':'-g');
 
+        $arrCurrency = [
+            'ETHUSDT','BTCUSDT','DOTUSDT','AXSTRY','USDTBRL','PIVXBTC','FETTRY','HOOKUSDT','BURGERUSDT','XMRBTC','USTCBUSD','MAGICBTC','BTCDAI',
+            'BETHUSDT','AGIXTRY','BCHTRY','OGNTRY','WRXUSDT','WAVESBUSD','XVSUSDT','ATMUSDT','DOGEBUSD','BNBUPUSDT','CRVBUSD','CRVUSDT'];
         $worker = new Worker();
-        $worker->onWorkerStart = function(){
+        $worker->onWorkerStart = function()use($arrCurrency){
             $url = config('urlserver.server');
             $worker_connection = new AsyncTcpConnection($url);
             $worker_connection->transport = 'ssl';
@@ -67,16 +70,18 @@ class ClientCurrency extends Command
                     });
             };
 
-            $worker_connection->onMessage = function($connection, $data) {
+            $worker_connection->onMessage = function($connection, $data) use($arrCurrency) {
                 $res = json_decode($data, true);
                 foreach ($res as $val) {
-                       if (isset($val['s'])) {
+                    if (isset($val['s'])) {
+                         if(in_array($val['s'],$arrCurrency)) {
                              $tmp = Currency::firstOrCreate(['name' => $val['s']]);
                              AddValues::addValueOne($tmp->id, $val['c']);
                              AddValues::addValueFive($tmp->id, $val['c']);
                              AddValues::addValueTen($tmp->id, $val['c']);
                              AddValues::addValueFifteen($tmp->id, $val['c']);
                              AddValues::addValueThirty($tmp->id, $val['c']);
+                         }
                      }
                   }
             };

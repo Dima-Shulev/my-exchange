@@ -22,7 +22,7 @@ class ValueCandle extends Model
     public function createCandle($how)
     {
         $cur = new Currency();
-        $res = $cur->select(['id', 'name'])->orderBy('id', "ASC")->get();
+        $res = $cur->select('id')->orderBy('id', "ASC")->get();
         if ($res !== null) {
             foreach ($res as $item) {
                 $lastVal = ValueCandle::where([['currency_id', $item->id],['status', $how]])->orderBy('id', 'DESC')->first();
